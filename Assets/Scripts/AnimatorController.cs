@@ -10,10 +10,12 @@ public class AnimatorController : NetworkBehaviour
 
     Animator animator;
     readonly int IS_RED = Animator.StringToHash("isRed");
+    bool initialIsRed;
 
     public void Awake()
     {
         animator = GetComponent<Animator>();
+        initialIsRed = animator.GetBool(IS_RED);
     }
 
     public void FastChangeTimes(int times)
@@ -32,9 +34,9 @@ public class AnimatorController : NetworkBehaviour
         }
     }
 
-    public void Toggle()
+    public void Reset()
     {
-        SetIsRed(!animator.GetBool(IS_RED));
+        SetIsRed(initialIsRed);
     }
 
     void SetIsRed(bool isRed)
